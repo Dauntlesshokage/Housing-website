@@ -1,0 +1,249 @@
+$PaletteMid: #293040;
+$PaletteAccent: #E2BC97;
+$anim: .3s all ease-in-out;
+
+a {
+  cursor:pointer;
+  display:inline-block;
+}
+body {
+  font-family: 'Open Sans', Sans-serif;
+  font-size: 18px;
+  color:#333;
+  background:#333;
+  padding:0;
+  margin:0;
+  .container {
+    background:#d7d7d7;
+    height:100vh;
+    width:100vw;
+    position:relative;
+    transition:$anim;
+    box-shadow: 0 0 5vh rgba(0,0,0,.1);
+  }
+  &.modal-active {
+    .container {
+      transform:scale(0.95,0.95);
+      opacity: .9;
+      pointer-events:none;
+    }
+    div.modal {
+      top: 50%;
+    }
+  } 
+}
+.actions {
+  position:absolute; left:50%; top: 50%; transform:translate(-50%,-50%);
+  
+  .btn {
+    color:#888;
+    border-radius: .3em;
+    padding: .5em 1em;
+    vertical-align:baseline;
+    text-decoration: none;
+    transition: $anim;
+    position: relative;
+    
+    &::after {
+      content:"";
+      width:0;
+      bottom:0;
+      left:0;
+      height: 2px;
+      background:#aaa;
+      position:absolute;
+      transition: $anim;
+    }
+    
+    &:hover,&:focus {
+      color:#666;
+      outline:none;
+      &::after {
+        width:100%;
+      }
+    }
+    &:active {
+      top:.1em;
+    }
+    
+    ~.btn {
+      margin-left: 1em;
+    }
+    
+    &.login {
+      color:#666;
+      &:hover,&:focus {
+        color:#444;
+      }
+    }
+  }
+}
+div.modal {
+  position:absolute;
+  padding: 4em;
+  background:$PaletteMid;
+  color:#888;
+  top:-100vh;
+  left:50%;
+  transform: translate(-50%,-50%);
+  transition: $anim;
+  min-width:300px;
+  font-size:14px;
+  border-radius:0;
+  max-height:100vh;
+  max-width:100vw;
+  overflow:auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,.3);
+  
+  .content {
+    transition: $anim;
+    max-height:45em;
+    overflow:hidden;
+  }
+  .success-check {
+    width:1em;
+    height:1em;
+    background-repeat:no-repeat;
+    background-position:center center;
+    background-color:transparent;
+    background-size:contain;
+    transition:$anim;
+    max-height:0;
+    position:relative; left:50%; top: 50%; transform:translate(-50%,0%);
+  }
+  &.success {
+    border-radius: 50em;
+    min-width: 0;
+    font-size: 4em;
+    padding:1em;
+    text-align:center;
+    .content {
+      max-height: 0;
+      max-width:0;
+    }
+    .success-check {
+      opacity:1;
+      max-height:none;
+    }
+  }
+  
+  .nav {
+    font-size: 20px;
+    font-weight:lighter;
+    margin-bottom:4em;
+    &.active {
+      font-weight:600;
+      color:#fff;
+    }
+    +.nav {
+      margin-left: 2em;
+    }
+  }
+  label {
+    text-transform: uppercase;
+    font-size:10px;
+    display:block;
+  }
+  .email {max-height:0;overflow:hidden; transition:$anim; opacity:0;}
+  .email input {visibility:none;}
+  &.register .email {max-height:6em; opacity:1;}
+  &.register .email input {display:block;}
+  
+  input,button {
+    box-sizing : border-box;
+    width:100%;
+    border:0;
+    border-radius: .3em;
+    padding: .7em 1em;    
+    font-family: 'Open Sans', Sans-serif;
+    &:focus {
+      outline:none;
+    }
+  }
+  input {
+    background:rgba($PaletteAccent,.1);
+    margin: .5em 0 1.5em;
+    font-weight:600;
+    color:$PaletteAccent;
+    border-bottom:2px solid transparent;
+    transition:$anim;
+    letter-spacing:.05em;
+    &:focus {
+      border-bottom-color: rgba($PaletteAccent,.4);
+    }
+  } 
+  button {
+    cursor:pointer;
+    margin: 4em 0;
+    background: $PaletteAccent;
+    color:$PaletteMid;
+    font-weight: 700;
+    text-transform:uppercase;
+    position:relative;
+    transition:$anim;
+    +button {
+      margin-top: .5em;
+      &::after {
+        display:none;
+      }
+    }
+    
+    + div {
+      border-top: 1px solid rgba($PaletteAccent,.5);
+      margin-top: 3em;
+      padding-top: 3em;      
+    }
+    
+    &::before {
+      content:"";
+      top:0;
+      left:-4px;
+      transition:$anim;
+      background:$PaletteAccent;
+      height:100%;
+      width:5px;
+      position:absolute;
+      transition-duration: 3s;
+      display:none;
+    }
+    
+    &.loading .loading {
+      display:block;
+    }
+  }
+  .text-center {
+    text-align:center;
+  }
+  a {
+    color:#888;
+    text-decoration:none;
+  }
+  
+  button span {
+    display:none;
+  }
+  &.register button .register {display:block;}
+  &.login button .login {display:block;}
+  button.loading span {
+    display:none !important;
+    &.loading {
+      animation: 3s throb ease-in-out;
+      display:block !important;
+    }
+  }
+}
+
+div.modal {
+  background: $PaletteMid;
+  background-repeat: no-repeat;
+  background-position:center center;
+  background-image:url('images/hotel.jpg');
+  background-size:cover;
+}
+.success-check {
+    background-image: url('images/hotel.jpg');
+}
+@keyframes throb {
+    0%,100% {letter-spacing:.05em;}
+    50% {letter-spacing:.2em;}
+  }
